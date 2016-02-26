@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+		
+		
+	<!-- DriverManagerDataSource dataSource=new DriverManagerDataSource();  dataSource.setUrl("jdbc:mysql://localhos...") -->
+	<!-- Utworzenie zrodla polaczenia z baza danych poprzez obiekt klasy Driver... -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/biblioteka?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<!-- Utworzenie Fabryki JPA za pomoca pomocniczej klasy Springa  -->
+	<!-- ref - przekazuje obiekt innej klasy a value waRTOSC -->
+	<bean id="MyEf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!-- Przekazanie klasy providera uslugi JPA czyl;i Hibernate -->
+		<property name="persistenceProviderClass" value="org.hibernate.jpa.HibernatePersistenceProvider"/>
+		<!-- Wskazujemy pakiet z klasami ktore sa mapowane do bazy danych -->
+		<property name="packagesToScan" value="com.software.biblioteka.core.domain"/>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+            	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- Utworzenie managera transakcji dla JPA - klasy obslugujacej zarzanie transakcjami -->
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="MyEf"/>
+	</bean>
+	
+	<!-- wlaczenia obslugi trabnsakcji poprzez adnotacje -->
+	<tx:annotation-driven transaction-manager="txManager"/>
+	
+	<!-- Wlaczamy adnotacje i wskazujemy pakiety z klasami adnotowanymi -->
+	<!-- W jak pakietach ma spring szukac swoich klas aby je uzyc w kontenerze -->
+	<context:component-scan base-package="com.software.biblioteka.core.dao"/>
+	<context:component-scan base-package="com.software.biblioteka.core.service"/>
+	
+</beans>
