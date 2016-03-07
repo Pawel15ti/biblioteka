@@ -13,7 +13,10 @@ import org.springframework.web.jsf.FacesContextUtils;
 
 import com.software.biblioteka.core.domain.Kategoria;
 import com.software.biblioteka.core.service.IKategoriaSerwis;
-
+//Fazy JSF
+//W pierwszej fazie zadania JSF konwertuje  wpisane wartosc prez uzytkownika
+//w drugiej fazie zadania JSF waliduje wpisane wartosc 
+//w trzecie fazie wywoluje akcje jesli nie ma bledow walidacji i konwersji
 @ManagedBean //kontroler JSF
 @ViewScoped //zasieg widoku - do poki jestemy na stronie to kontroler zapamietuje swoj stan a po wyjsciu z tej strony kontoler zostaje usuniety z pamieci
 public class KategoriaUtworzKontroler implements Serializable {
@@ -23,6 +26,7 @@ public class KategoriaUtworzKontroler implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Kategoria kategoria;
+	private Integer pole;
 	
 	@PostConstruct //ta metoda ma sie wykonac zaraz po utworzeniu tej klasy()
 	public void init()
@@ -57,6 +61,14 @@ public class KategoriaUtworzKontroler implements Serializable {
 
 	public void setKategoria(Kategoria kategoria) {
 		this.kategoria = kategoria;
+	}
+
+	public Integer getPole() {
+		return pole;
+	}
+
+	public void setPole(Integer pole) {
+		this.pole = pole;
 	}
 	
 	

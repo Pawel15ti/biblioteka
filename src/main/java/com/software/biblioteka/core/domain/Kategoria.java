@@ -13,6 +13,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="KATEGORIA")
@@ -33,7 +35,11 @@ public class Kategoria implements Serializable{
 	@Column(name="kategoria_id")
 	private Integer id;
 	
-	@Column(length=20, nullable=false)
+	@NotNull(message="Nazwa jest wymagana")
+	@Size.List({
+		@Size(min=5, message="Nazwa nie może mieć mniej niż {min} znaków"),
+		@Size(max=20, message="Nazwa nie może mieć więcej niż {max} znaków")
+	})
 	private String nazwa;
 	
 	@OneToMany(mappedBy="kategoria", cascade=CascadeType.REMOVE)

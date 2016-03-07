@@ -8,13 +8,36 @@
 <h:head></h:head> 
 <body> 
 	<h5>Utworz kategorie</h5>
-	<h:form>
-		<p:messages globalOnly="true"></p:messages>
+	<h:form id="createForm">
+	<p:growl id="growl" showDetail="true" sticky="false" life="3000" /> 
+		<ui:remove>
+		<p:messages globalOnly="true"/>
+		</ui:remove>
+		
 		<h:panelGrid columns="3">
-			<h:outputLabel for="nazwa" value="Nazwa:" />
-			<h:inputText id="nazwa" value="#{kategoriaUtworzKontroler.kategoria.nazwa}" />
+			<p:outputLabel for="nazwa" value="Nazwa:" />
+			<p:inputText id="nazwa" value="#{kategoriaUtworzKontroler.kategoria.nazwa}" />
 			<p:message for="nazwa"/>
 		</h:panelGrid>
+		
+		
+		<ui:remove>
+		<h:panelGrid columns="3">
+			<p:outputLabel for="nazwa" value="Nazwa:" />
+			<p:inputText id="nazwa" value="#{kategoriaUtworzKontroler.kategoria.nazwa}" >
+				<f:validateLength maximum="20" minimum="5"/>
+			</p:inputText>
+			<p:message for="nazwa"/>
+			
+			
+			<p:outputLabel for="liczba" value="Liczba:" />
+			<p:inputText id="liczba" value="#{kategoriaUtworzKontroler.pole}"  converterMessage="Podana wartośc nie jest liczba" validatorMessage="Podana liczba może być z przedziału od 100 do 1000" >
+				<f:validateLongRange minimum="100" maximum="1000"/>
+			</p:inputText>
+			<p:message for="liczba"/>
+			
+		</h:panelGrid>
+		</ui:remove>
 		<p:commandButton value="Utworz" action="#{kategoriaUtworzKontroler.utworzAkcja()}" ajax="false"/>
 	</h:form>
 </body> 

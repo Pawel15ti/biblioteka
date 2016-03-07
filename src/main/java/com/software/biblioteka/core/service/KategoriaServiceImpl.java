@@ -2,6 +2,8 @@ package com.software.biblioteka.core.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,9 @@ import com.software.biblioteka.core.domain.Kategoria;
 //@Transactional - jesli odkomentowane to wsyztskie metody publiczne tej klasy beda wykonywane w ramach transakcji
 public class KategoriaServiceImpl implements IKategoriaSerwis{
 
+	//Utworzenie dziennika zdarzen dla klasy KategoriaServiceImpl
+	private static final Logger logger=LoggerFactory.getLogger(KategoriaServiceImpl.class);
+	
 	@Autowired //wstrzyknij tutaj obiekt klasy ktora implementuje ten interfejs i jest w kontenerze springa
 	private IKategoriaDAO dao;
 	//@Autowired
@@ -21,11 +26,19 @@ public class KategoriaServiceImpl implements IKategoriaSerwis{
 	@Override
 	@Transactional //ta m,etoda bedzie wykonywana w ramach transakcji na bazie danych
 	public Kategoria utworz(Kategoria kategoria) {
+		//ERROR,WARN,INFO,DEBUG,TRACE
+		logger.info("tworze nowa kategorie o nazwie {}",kategoria.getNazwa());
+		logger.warn("tworze nowa kategorie o nazwie {}",kategoria.getNazwa());
+		logger.error("tworze nowa kategorie o nazwie {}",kategoria.getNazwa());
+		logger.debug("Tworze nowa kategorie o nazwie {}",kategoria.getNazwa());
+		logger.trace("tworze nowa kategorie o nazwie {}",kategoria.getNazwa());
 		
 		//daoAutor.update()
 		//daoKsiakza.delete()
-		
-		return dao.utworz(kategoria);
+		Kategoria nowaKategoria=dao.utworz(kategoria);
+		logger.debug("Utworzono nowa kategorie {}",kategoria);
+		//logger.debug("Witaj A {} B {}",kategoria.getId(),kategoria.getNazwa());
+		return nowaKategoria;
 	}
 
 	@Override
