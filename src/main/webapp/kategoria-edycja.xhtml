@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+      
+
+<h:head></h:head> 
+<body> 
+
+<h:form id="createForm2">
+		<p:messages globalOnly="true"/>
+		<h:panelGrid columns="3">
+			<p:outputLabel for="nazwa" value="Nazwa:" />
+			<p:inputText id="nazwa" value="#{kategoriaEdycjaKontroler.kategoria.nazwa}" readonly="#{kategoriaEdycjaKontroler.kategoria==null}" />
+			<p:message for="nazwa"/>
+			
+			
+		</h:panelGrid>	
+		<h:commandButton value="Zapisz" action="#{kategoriaEdycjaKontroler.zapiszZmiany()}" disabled="#{kategoriaEdycjaKontroler.kategoria==null}" ajax="false"/>
+		<h:button outcome="kategoria-lista" value="Cofnij"/>
+	</h:form>
+
+</body> 
+</html>

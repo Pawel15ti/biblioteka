@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h1>Lista autorów :</h1>
+</h:head>
+<body>
+	<h:form>
+		<p:messages globalOnly="true"/>
+		<p:link outcome="autorzy-utworz" >
+					<p:graphicImage library="icons" name="add1.png" alt="Utwórz nowy" title="Utwórz nowy" width="48" height="48"/>
+				</p:link>
+		<p:dataTable value="#{autorListaKontroler.lista}" var="autor">
+			<p:column headerText="Id">
+				<h:outputText value="#{autor.id}" />
+
+			</p:column>
+			<p:column headerText="Imie">
+				<h:outputText value="#{autor.imie}" />
+
+			</p:column>
+			<p:column headerText="Nazwisko">
+				<h:outputText value="#{autor.nazwisko}" />
+
+			</p:column>
+			<p:column headerText="Zyciorys">
+				<h:outputText value="#{autor.zyciorys}" />
+			</p:column>
+				
+			<p:column headerText="Akcje">
+				
+				<p:link outcome="autor-podglad">
+					<p:graphicImage library="icons" name="info.png" alt="podglad" title="Podgląd" width="48" height="48"/>
+					<f:param name="id" value="#{autor.id}"/>
+				</p:link>
+				
+				<p:link outcome="autor-edycja" style="margin-left:5px;">
+					<p:graphicImage library="icons" name="edit.png" alt="podglad" title="Edycja" width="48" height="48"/>
+					<f:param name="id" value="#{autor.id}"/>
+				</p:link>
+				
+				<p:commandLink style="margin-left:5px;" action="#{autorListaKontroler.usunAutora(autor.id)}" ajax="false">
+					<p:graphicImage library="icons" name="close.png" alt="podglad" title="Usuń" width="48" height="48"/>
+				</p:commandLink>
+				
+				<p:commandLink style="margin-left:5px;" action="#{autorListaKontroler.usunAutora2()}" ajax="false">
+					<p:graphicImage library="icons" name="close.png" alt="podglad" title="Usuń" width="48" height="48"/>
+					<f:param name="autorID" value="#{autor.id}" />
+				</p:commandLink>
+				
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
+
+</body>
+</html>

@@ -12,8 +12,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 @NamedQueries({
 	
+	@NamedQuery(name="Autor.znajdzWszystkie",query="select a from Autor a "),
 
 @NamedQuery(name="Autor.findByTytul",query="select a from Autor a join a.ksiazki k where k.tytul=:tytul"),
 @NamedQuery(name="Autor.findByKategoriaID",query="select distinct a from Autor a join a.ksiazki k join k.kategoria g where g.id=:id")
@@ -29,11 +32,22 @@ public class Autor implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@Column(length=20,nullable=false)
+	@NotNull(message="Nazwa jest wymagana")
+	@Size.List({
+		@Size(min=5, message="Nazwa nie może mieć mniej niż {min} znaków"),
+		@Size(max=20, message="Nazwa nie może mieć więcej niż {max} znaków")
+	})
 	private String imie;
-	@Column(length=40,nullable=false)
+	@NotNull(message="Nazwa jest wymagana")
+	@Size.List({
+		@Size(min=6, message="Nazwa nie może mieć mniej niż {min} znaków"),
+		@Size(max=20, message="Nazwa nie może mieć więcej niż {max} znaków")
+	})
 	private String nazwisko;
-	@Column(length=500,nullable=true)
+	@Size.List({
+		
+		@Size(max=500, message="Nazwa nie może mieć więcej niż {max} znaków")
+	})
 	private String zyciorys;
 	
 	@ManyToMany(mappedBy="autorzy")

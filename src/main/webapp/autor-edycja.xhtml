@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+	<h:form id="createForm1">
+		<p:messages globalOnly="true"/>
+		<h:panelGrid columns="3">
+			<p:outputLabel for="imie" value="Imie:" />
+			<p:inputText id="imie" value="#{autorEdycjaKontroler.autor.imie}" readonly="#{autorEdycjaKontroler.autor==null}" />
+			<p:message for="imie"/>
+			
+			<p:outputLabel for="nazwisko" value="Nazwisko:" />
+			<p:inputText id="nazwisko" value="#{autorEdycjaKontroler.autor.nazwisko}" readonly="#{autorEdycjaKontroler.autor==null}" />
+			<p:message for="nazwisko"/>
+			
+			<p:outputLabel for="zyciorys" value="Zyciorys:" />
+			<p:inputTextarea id="zyciorys" value="#{autorEdycjaKontroler.autor.zyciorys}" readonly="#{autorEdycjaKontroler.autor==null}" />
+			<p:message for="zyciorys"/>
+		</h:panelGrid>	
+		<h:commandButton value="Zapisz" action="#{autorEdycjaKontroler.zapiszZmiany()}" disabled="#{autorEdycjaKontroler.autor==null}" ajax="false"/>
+		<h:button outcome="autor-lista" value="Cofnij"/>
+	</h:form>
+</body> 
+</html>

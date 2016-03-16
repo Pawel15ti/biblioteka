@@ -20,7 +20,8 @@ import javax.validation.constraints.Size;
 @Table(name="KATEGORIA")
 
 @NamedQueries({
-	@NamedQuery(name="Kategoria.znajdzWszystkie" , query="select k from Kategoria k")
+	@NamedQuery(name="Kategoria.znajdzWszystkie" , query="select k from Kategoria k"),
+	@NamedQuery(name="Kategoria.findByNazwa" , query="select k from Kategoria k where k.nazwa=:nazwa")
 })
 public class Kategoria implements Serializable{
 	

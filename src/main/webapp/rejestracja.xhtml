@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Formularz rejestracji</h1>
+	<h:form>
+		<p:messages globalOnly="true"/>
+		<h:panelGrid columns="3" >
+		
+			<p:outputLabel for="login" value="Login"/>
+			<p:inputText id="login" value="#{rejestracjaKontroler.uzytkownik.login}"/>
+			<p:message for="login"/>
+			
+			<p:outputLabel for="haslo" value="Hasło"/>
+			<p:password id="haslo" value="#{rejestracjaKontroler.uzytkownik.haslo}" redisplay="true"/>
+			<p:message for="haslo"/>
+			
+			<p:outputLabel for="rehaslo" value="Powtorz hasło"/>
+			<p:password id="rehaslo" value="#{rejestracjaKontroler.haslo}" redisplay="true"/>
+			<p:message for="rehaslo"/>
+			
+			<p:outputLabel for="imie" value="Imię"/>
+			<p:inputText id="imie" value="#{rejestracjaKontroler.uzytkownik.imie}"/>
+			<p:message for="imie"/>
+			
+			<p:outputLabel for="nazwisko" value="Nazwisko"/>
+			<p:inputText id="nazwisko" value="#{rejestracjaKontroler.uzytkownik.nazwisko}"/>
+			<p:message for="nazwisko"/>
+			
+			<p:outputLabel for="email" value="Email"/>
+			<p:inputText id="email" value="#{rejestracjaKontroler.uzytkownik.mail}"/>
+			<p:message for="email"/>
+		</h:panelGrid>
+		<p:commandButton value="Rejestruj" action="#{rejestracjaKontroler.rejestruj()}" ajax="false"/>
+	</h:form>
+</body> 
+</html>

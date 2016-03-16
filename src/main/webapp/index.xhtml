@@ -7,9 +7,12 @@
 
 <h:head></h:head> 
 <body> 
-	<h1><h:outputText value="Witaj na stronie powitalnej" /></h1>
-	<h:panelGrid columns="1">
-		<p:button value="Utworz kategorie" outcome="katagoria-utworz"/>
+	<h1><h:outputText value="Witaj na stronie powitalnej  #{sesjaUzytkownikaKontroler.zalogowany.imie} #{sesjaUzytkownikaKontroler.zalogowany.nazwisko}" /></h1>
+	<h:panelGrid columns="2">
+		<p:button value="Utworz kategorie" outcome="kategoria-utworz"/>
+		<p:button value="Lista kategorie" outcome="kategoria-lista"/>
+		<p:button value="Utworz autora" outcome="autorzy-utworz"/>
+		<p:button value="Lista autorów" outcome="autor-lista"/>
 	</h:panelGrid>
 </body> 
 </html>

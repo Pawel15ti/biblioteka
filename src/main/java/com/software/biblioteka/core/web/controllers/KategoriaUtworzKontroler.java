@@ -13,6 +13,8 @@ import org.springframework.web.jsf.FacesContextUtils;
 
 import com.software.biblioteka.core.domain.Kategoria;
 import com.software.biblioteka.core.service.IKategoriaSerwis;
+import com.software.biblioteka.core.service.NazwaKategoriJuzIstniejeException;
+import com.software.biblioteka.core.web.utility.JSFUtility;
 //Fazy JSF
 //W pierwszej fazie zadania JSF konwertuje  wpisane wartosc prez uzytkownika
 //w drugiej fazie zadania JSF waliduje wpisane wartosc 
@@ -41,16 +43,17 @@ public class KategoriaUtworzKontroler implements Serializable {
 		//pobieramy sobie klase implementujaca serwis IKategoriaSerwis
 		IKategoriaSerwis serwis=ctx.getBean(IKategoriaSerwis.class);
 		//wywolujemy metode biznesowa utworzenia kategori
-		serwis.utworz(kategoria);
-		//tworzymy wiadomosc typu info 
-		FacesMessage msg=new FacesMessage(FacesMessage.SEVERITY_INFO, "Utworzono kategorie pomyslnie", "Utworzono kategorie pomyslnie");
-		//pobieramy kontekst JSF
-		FacesContext jsfCtx=  FacesContext.getCurrentInstance();
-		//dodajemy wiadomosc dla kontekstu JSF do strony(globalna poniewaz pierwszy arg jest null)
-		jsfCtx.addMessage(null, msg);
+		try {
+			serwis.utworz(kategoria);//jesli tutaj wyjatek wyskoczy to odrazu idziemy do catch
+			JSFUtility.dodajWiadomoscGlobalna("Utworzono kategorie pomyslnie");
+			//czyscimy obiekt kategori tworzac nowy
+			init();
+		} catch (NazwaKategoriJuzIstniejeException e) {
+			
+			JSFUtility.dodajBladGlobalny(e.getMessage());
+			
+		}
 		
-		//czyscimy obiekt kategori tworzac nowy
-		init();
 		//return null - oznacza pozostan na tejk stronie
 		return null;
 	}
