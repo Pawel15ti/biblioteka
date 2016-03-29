@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+         xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+
+	<h:form>
+	
+	<p:dataTable value="#{uzytkownikListaKontroler.lista}" var="uzytkownik">
+	
+	<p:column headerText="Imie:">
+				<h:outputText value="#{uzytkownik.imie}" />
+			</p:column>
+	
+	<p:column headerText="Nazwisko:">
+	
+	<h:outputText value="#{uzytkownik.nazwisko}" />
+	</p:column>
+	<p:column headerText="Email:">
+	<h:outputText value="uzytkownik.mail" />
+	</p:column>
+	
+	<p:column headerText="Akcje:">
+<p:link outcome="kategoria-podglad">
+					<p:graphicImage library="icons" name="info.png" alt="podglad" title="Podgląd" width="48" height="48"/>
+					<f:param name="id" value="#{kategoria.id}"/>
+				</p:link>
+				</p:column>
+	</p:dataTable>
+	
+	
+	
+	
+	
+	
+	</h:form>
+
+
+
+</body> 
+</html>

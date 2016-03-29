@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 @NamedQueries({
+	@NamedQuery(name="Uzytkownik.znajdzWszystkie",query="select u from Uzytkownik u"),
 	@NamedQuery(name="Uzytkownik.znajdzPoLoginieiHasle",query="select u from Uzytkownik u where u.login=:login and u.haslo=:haslo"),
 	@NamedQuery(name="Uzytkownik.znajdzPoLoginie",query="select u from Uzytkownik u where u.login=:login")
 })

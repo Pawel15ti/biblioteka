@@ -55,4 +55,11 @@ public class JPAUzytkownikDAO implements IUzytkownikDAO{
 		
 	}
 
+	public List<Uzytkownik> znajdzWszystkie() {
+	TypedQuery<Uzytkownik> query=em.createNamedQuery("Uzytkownik.znajdzWszystkie",Uzytkownik.class);
+	List<Uzytkownik> uzytkownicy=query.getResultList();
+	
+		return uzytkownicy;
+	}
+
 }

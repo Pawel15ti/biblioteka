@@ -1,5 +1,7 @@
 package com.software.biblioteka.core.service;
 
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +48,13 @@ public class UzytkownikSerwisImpl implements IUzytkownikSerwis{
 		return dao.znajdz(login, shaszowanehaslo);
 		
 	
+	}
+
+	@Override
+	@Transactional
+	public List<Uzytkownik> znajdzWszystkie() {
+
+		return dao.znajdzWszystkie();
 	}
 
 }
